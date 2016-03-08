@@ -1,0 +1,51 @@
+<div class="jumbotron text-center" ng-if="!login.loggedIn">
+    <div>
+        <h1>Hello there!</h1>
+    </div>
+    <div>
+        <p>Login to be able to view and edit your user details</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="container">
+                <form class= "form-sigin" method="post" ng-submit="login.doLogin()">
+                    Email: <input type="email" name="email" class= "form-control" ng-model="login.loginData.email" required>
+                    Password: <input type="password" name="password" class= "form-control" ng-model="login.loginData.password" required> </br>
+                    <div ng-if="login.error"> <p><font color="red" >{{login.error}}</font></p></div>
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <a href="/signup" class="btn btn-danger">Register</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="jumbotron text-center" ng-if="login.loggedIn">
+    <div>
+        <h1>Hello there!</h1>
+    </div>
+    <div>
+        <p>You are already logged in, please proceed to your settings page by pressing the button below</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <div class="container">
+                    <a href="/userSettings" class="btn btn-primary">Control Panel</a>
+                    <a href="/home" class="btn btn-primary" ng-click="login.doLogout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+

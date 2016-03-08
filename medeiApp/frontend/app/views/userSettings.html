@@ -1,0 +1,46 @@
+<div class="jumbotron text-center" >
+    <div>
+        <h1>You are now logged in!</h1>
+    </div>
+    <div>
+        <p>Welcome to your user account settings</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <br class="container">
+                    Email: {{ userCtrl.currentUser.email }} </br>
+                    First name: {{ userCtrl.currentUser.fname }} </br>
+                    Last name: {{ userCtrl.currentUser.lname }} </br>
+                    <button id="editbutton" type="submit" class="btn btn-warning" onclick="document.getElementById('divtoshow').style.display='block'">Edit</button>
+                    <button ng-controller="LoginController as login" ng-click="login.doLogout()" class="btn btn-primary">Logout</button>
+                    <button ng-click="userCtrl.DeleteThisUser()" class="btn btn-danger">Delete Account</button>
+                    <button type="submit" class="btn btn-lg" onclick="document.getElementById('divtoshowifadmin').style.display='block'" ng-show="userCtrl.currentUser.isAdmin"> Show all users </button>
+
+                </br></br>
+                <div id = "divtoshow" style= "display:none;" >
+                    <form class= "form-sigin" method="put" ng-submit="userCtrl.updateCurrentUser()">
+                        First name: <input type="text" name="fname" ng-model="userCtrl.userData.fname" required> </br>
+                        Last name: <input type="text" name="lname" ng-model="userCtrl.userData.lname" required> </br>
+                        Password: <input type="password" name="password" ng-model="userCtrl.userData.password" required></br>
+                        <div ng-if="userCtrl.error"> <p><font color="red" >{{userCtrl.error}}</font></p></div></br>
+                        <button type="submit" class="btn btn-success">Update</button></br></br>
+                    </form>
+                </div>
+            <div id = "divtoshowifadmin" style= "display:none;">
+                <ol class="jumbotron text-left">
+                    <div ng-repeat="user in userCtrl.users">
+                        <li>
+                            Email: {{ user.email }} </br>
+                            First name: {{ user.fname }} </br>
+                            Last name: {{ user.lname }} </br>
+                            <div ng-if="user.isAdmin"> THIS ONE IS ADMIN </div>
+                            <div ng-if="!user.isAdmin"><button ng-click="userCtrl.makeHimAdmin(user.email); user.isAdmin = true" class="btn btn-success">Make this guy Admin</button></div>
+                            </br></br>
+                        </li>
+                    </div>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+</div>
